@@ -68,8 +68,15 @@ npm run dev
 git push -u origin main
 ```
 
-ที่ vercel.com → **Add New › Project** → เลือก repo นี้ → Framework ตรวจเจอ Next.js อัตโนมัติ
+ที่ vercel.com → **Add New › Project** → เลือก repo นี้
 ก่อนกด Deploy ให้ใส่ Environment Variables ทั้ง 3 ตัวข้างบน (ทั้ง Production, Preview, Development)
+
+`vercel.json` ประกาศ `"framework": "nextjs"` ไว้แล้ว จึงไม่ต้องพึ่งการตรวจจับอัตโนมัติ
+
+> **ถ้าเจอ error `No Output Directory named "public" found`** แปลว่าโปรเจกต์บน Vercel ถูกตั้ง
+> Framework Preset เป็น "Other" (มักเกิดเมื่อ import repo ตอนที่ยังไม่มี commit) แก้ที่
+> **Settings › Build and Deployment › Framework Settings** → เลือก **Next.js**
+> และปิดสวิตช์ Override ของ Build Command กับ Output Directory ให้หมด แล้วสั่ง Redeploy
 
 หรือใช้ CLI:
 
