@@ -18,7 +18,8 @@ const CONFIG = {
   SPREADSHEET_ID: '13SMQTIlSw2BHjy0LcTX_S0qiz6CGDNDx_8rsqAAeQj8',
 
   // ชีตหลัก: มีแถวหัวข้อกลุ่ม "สถานะ : ..." คั่นระหว่างบล็อกข้อมูล
-  SHEET_NAME: 'comfirm_data',
+  // หมายเหตุ: แท็บ comfirm_data มีข้อมูลตัวอย่างอยู่แถวเดียว ข้อมูลจริงอยู่ที่ cnt_com
+  SHEET_NAME: 'cnt_com',
 
   // ชีตสำรองไว้ map รหัสนักศึกษา -> อาจารย์ที่ปรึกษา (คอลัมน์ A = อาจารย์, B = ID)
   ADVISOR_SHEET_NAME: 'อาจารย์ที่ปรึกษา',
