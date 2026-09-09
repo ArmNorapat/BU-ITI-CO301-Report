@@ -63,15 +63,3 @@ export type StageKey =
   | 'accepted'
   | 'rejected'
   | 'unknown';
-
-export type StatItem = { label: string; count: number };
-
-export type Stats = {
-  totalApplications: number;
-  totalStudents: number;
-  byStage: StatItem[];
-  byDepartment: StatItem[];
-  byAdvisor: StatItem[];
-  topCompanies: StatItem[];
-  updatedAt: string;
-};

@@ -1,12 +1,7 @@
 import 'server-only';
 
 import { resolveStage } from './stages';
-import type {
-  PublicApplication,
-  RawApplication,
-  Stats,
-  StudentResult,
-} from './types';
+import type { PublicApplication, RawApplication, StudentResult } from './types';
 
 const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL ?? '';
 const APPS_SCRIPT_TOKEN = process.env.APPS_SCRIPT_TOKEN ?? '';
@@ -142,9 +137,4 @@ export async function getStudent(idInput: string): Promise<StudentResult> {
     maskedEmail: maskEmail(primary.email),
     applications,
   };
-}
-
-export async function getStats(): Promise<Stats> {
-  const data = await callAppsScript<{ stats: Stats }>({ action: 'stats' });
-  return data.stats;
 }

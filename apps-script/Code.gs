@@ -6,7 +6,6 @@
  * Endpoints (GET):
  *   ?action=health
  *   ?action=student&id=<รหัสนักศึกษา>&token=<API_TOKEN>
- *   ?action=stats&token=<API_TOKEN>
  *
  * Deploy: Deploy > New deployment > Web app
  *   Execute as:      Me
@@ -58,10 +57,6 @@ function doGet(e) {
 
       // นักศึกษาหนึ่งคนอาจสมัครหลายบริษัท จึงส่งกลับทุกใบสมัคร
       return json({ ok: true, id: id, applications: found });
-    }
-
-    if (action === 'stats') {
-      return json({ ok: true, stats: buildStats(getRecords()) });
     }
 
     return json({ ok: false, error: 'UNKNOWN_ACTION' });
@@ -257,50 +252,17 @@ function normalizeId(value) {
   return s.replace(/\D/g, '');
 }
 
-// -------------------------------------------------------------------- stats
-
-function buildStats(records) {
-  var byStage = {};
-  var byDepartment = {};
-  var byAdvisor = {};
-  var byCompany = {};
-  var studentIds = {};
-
-  records.forEach(function (r) {
-    studentIds[r.id] = true;
-    bump(byStage, r.stage || 'ไม่ระบุสถานะ');
-    bump(byDepartment, r.department || 'ไม่ระบุสาขา');
-    bump(byAdvisor, r.advisor || 'ยังไม่ระบุอาจารย์');
-    if (r.company) bump(byCompany, r.company);
-  });
-
-  return {
-    totalApplications: records.length,
-    totalStudents: Object.keys(studentIds).length,
-    byStage: toSortedList(byStage),
-    byDepartment: toSortedList(byDepartment),
-    byAdvisor: toSortedList(byAdvisor),
-    topCompanies: toSortedList(byCompany).slice(0, 15),
-    updatedAt: new Date().toISOString(),
-  };
-}
-
-function bump(obj, key) {
-  obj[key] = (obj[key] || 0) + 1;
-}
-
-function toSortedList(obj) {
-  return Object.keys(obj)
-    .map(function (k) { return { label: k, count: obj[k] }; })
-    .sort(function (a, b) { return b.count - a.count; });
-}
-
 // --------------------------------------------------------------- dev helper
 
 /** รันจากใน editor เพื่อตรวจว่าพาร์สชีตได้ถูกต้องหรือไม่ */
 function debugPreview() {
   var records = readRecords();
+  var stages = {};
+  records.forEach(function (r) {
+    var key = r.stage || '(ไม่ระบุ)';
+    stages[key] = (stages[key] || 0) + 1;
+  });
   Logger.log('records: %s', records.length);
-  Logger.log('stages: %s', JSON.stringify(buildStats(records).byStage, null, 2));
+  Logger.log('stages: %s', JSON.stringify(stages, null, 2));
   Logger.log('sample: %s', JSON.stringify(records[0], null, 2));
 }

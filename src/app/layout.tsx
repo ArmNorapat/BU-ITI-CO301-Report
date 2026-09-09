@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-dvh bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
         <div className="flex min-h-dvh flex-col">
           <header className="border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/80">
-            <div className="mx-auto flex max-w-4xl items-center justify-between gap-4 px-5 py-4">
+            <div className="mx-auto flex max-w-4xl items-center px-5 py-4">
               <Link href="/" className="flex items-center gap-3">
                 <span
                   aria-hidden
@@ -38,12 +38,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     School of Information Technology and Innovation
                   </span>
                 </span>
-              </Link>
-              <Link
-                href="/stats"
-                className="rounded-lg px-3 py-1.5 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
-              >
-                ภาพรวม
               </Link>
             </div>
           </header>
