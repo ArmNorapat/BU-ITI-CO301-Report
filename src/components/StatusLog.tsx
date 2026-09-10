@@ -22,8 +22,8 @@ export function StatusLog({ text }: { text: string }) {
   const shown = expanded || !overflowing ? lines : lines.slice(0, PREVIEW_LINES);
 
   return (
-    <div className="mt-5 rounded-xl bg-neutral-50 px-4 py-3 dark:bg-neutral-800/50">
-      <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+    <div className="mt-5 rounded-xl bg-slate-50 px-4 py-3 dark:bg-slate-800/50">
+      <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
         บันทึกจากอาจารย์ที่ปรึกษา
         {overflowing ? (
           <span className="ml-1 font-normal">(ล่าสุดอยู่บนสุด)</span>
@@ -34,7 +34,7 @@ export function StatusLog({ text }: { text: string }) {
         {shown.map((line, i) => (
           <li
             key={i}
-            className="text-sm leading-relaxed break-words text-neutral-800 dark:text-neutral-200"
+            className="text-sm leading-relaxed break-words text-slate-800 dark:text-slate-200"
           >
             {line.replace(/^[-•]\s*/, '')}
           </li>
@@ -45,7 +45,7 @@ export function StatusLog({ text }: { text: string }) {
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3 text-sm font-medium text-orange-600 underline-offset-2 hover:underline dark:text-orange-400"
+          className="mt-3 text-sm font-medium text-indigo-600 underline-offset-2 hover:underline dark:text-indigo-400"
         >
           {expanded ? 'ย่อบันทึก' : `ดูบันทึกทั้งหมด (อีก ${lines.length - PREVIEW_LINES} บรรทัด)`}
         </button>

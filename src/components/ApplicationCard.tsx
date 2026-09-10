@@ -1,7 +1,6 @@
-import { stageTone } from '@/lib/stages';
+import { stageDescription, stageTone } from '@/lib/stages';
 import type { PublicApplication } from '@/lib/types';
 
-import { StageTimeline } from './StageTimeline';
 import { StatusLog } from './StatusLog';
 
 /** ป้ายบอกว่าเอกสารชิ้นนั้นส่งครบหรือยัง */
@@ -10,7 +9,7 @@ function DocChip({ label, ok, href }: { label: string; ok: boolean; href?: strin
     'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset';
   const tone = ok
     ? 'bg-emerald-50 text-emerald-700 ring-emerald-600/20 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-400/30'
-    : 'bg-neutral-100 text-neutral-500 ring-neutral-500/20 dark:bg-neutral-800 dark:text-neutral-400 dark:ring-neutral-600/40';
+    : 'bg-slate-100 text-slate-500 ring-slate-500/20 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-600/40';
 
   const content = (
     <>
@@ -38,8 +37,8 @@ function Field({ label, value }: { label: string; value: string }) {
   if (!value || value === '-') return null;
   return (
     <div>
-      <dt className="text-xs font-medium text-neutral-500 dark:text-neutral-400">{label}</dt>
-      <dd className="mt-0.5 text-sm whitespace-pre-line text-neutral-800 dark:text-neutral-200">
+      <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</dt>
+      <dd className="mt-0.5 text-sm whitespace-pre-line text-slate-800 dark:text-slate-200">
         {value}
       </dd>
     </div>
@@ -47,36 +46,30 @@ function Field({ label, value }: { label: string; value: string }) {
 }
 
 export function ApplicationCard({ app, index }: { app: PublicApplication; index: number }) {
+  const description = stageDescription(app.stageKey);
+
   return (
-    <article className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm sm:p-6 dark:border-neutral-800 dark:bg-neutral-900">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
-            ใบสมัครที่ {index + 1}
-          </p>
-          <h3 className="mt-1 text-lg font-semibold break-words">
-            {app.company || 'ยังไม่ระบุสถานประกอบการ'}
-          </h3>
-          {app.position ? (
-            <p className="mt-0.5 text-sm text-neutral-600 dark:text-neutral-400">{app.position}</p>
-          ) : null}
-        </div>
-        <span
-          className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${stageTone(app.stageKey)}`}
-        >
-          {app.stageLabel}
-        </span>
+    <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900">
+      <header className="min-w-0">
+        <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+          ใบสมัครที่ {index + 1}
+        </p>
+        <h3 className="mt-1 text-lg font-semibold break-words">
+          {app.company || 'ยังไม่ระบุสถานประกอบการ'}
+        </h3>
+        {app.position ? (
+          <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">{app.position}</p>
+        ) : null}
       </header>
 
-      <div className="mt-6 border-t border-neutral-100 pt-6 dark:border-neutral-800">
-        <StageTimeline currentStep={app.stageStep} stageKey={app.stageKey} />
+      {/* สถานะคือสิ่งที่นักศึกษาเข้ามาดู จึงให้เป็นบล็อกเด่นแทนการเป็นป้ายเล็ก ๆ */}
+      <div
+        className={`mt-5 rounded-xl px-4 py-4 ring-1 ring-inset ${stageTone(app.stageKey)}`}
+      >
+        <p className="text-xs font-medium opacity-80">สถานะล่าสุด</p>
+        <p className="mt-1 text-xl leading-snug font-bold break-words">{app.stageLabel}</p>
+        {description ? <p className="mt-2 text-sm leading-relaxed">{description}</p> : null}
       </div>
-
-      {app.stageKey === 'rejected' ? (
-        <p className="mt-5 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-800 dark:bg-rose-500/10 dark:text-rose-200">
-          ผลการพิจารณาครั้งนี้ยังไม่ผ่าน กรุณาติดต่ออาจารย์ที่ปรึกษาเพื่อเลือกสถานประกอบการใหม่
-        </p>
-      ) : null}
 
       {app.statusText ? <StatusLog text={app.statusText} /> : null}
 
@@ -88,7 +81,7 @@ export function ApplicationCard({ app, index }: { app: PublicApplication; index:
         {app.phone ? <Field label="เบอร์โทรศัพท์ที่ให้ไว้" value={app.phone} /> : null}
       </dl>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-neutral-100 pt-5 dark:border-neutral-800">
+      <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-5 dark:border-slate-800">
         <DocChip label="Web Portfolio" ok={app.hasPortfolio} href={app.portfolioUrl} />
         <DocChip label="Resume / Transcript" ok={app.hasDocuments} href={app.documentsUrl} />
         <DocChip label="LinkedIn" ok={app.hasLinkedin} href={app.linkedinUrl} />

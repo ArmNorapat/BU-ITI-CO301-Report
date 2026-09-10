@@ -21,20 +21,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th" className={thai.variable}>
-      <body className="min-h-dvh bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
+      <body className="min-h-dvh bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
         <div className="flex min-h-dvh flex-col">
-          <header className="border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/80">
+          <header className="border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
             <div className="mx-auto flex max-w-4xl items-center px-5 py-4">
               <Link href="/" className="flex items-center gap-3">
                 <span
                   aria-hidden
-                  className="grid size-9 shrink-0 place-items-center rounded-lg bg-orange-500 text-sm font-bold text-white"
+                  className="grid size-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white"
                 >
                   BU
                 </span>
                 <span className="leading-tight">
                   <span className="block text-sm font-semibold">ผลการพิจารณาสหกิจศึกษา</span>
-                  <span className="block text-xs text-neutral-500 dark:text-neutral-400">
+                  <span className="block text-xs text-slate-500 dark:text-slate-400">
                     School of Information Technology and Innovation
                   </span>
                 </span>
@@ -44,8 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <main className="mx-auto w-full max-w-4xl flex-1 px-5 py-8 sm:py-12">{children}</main>
 
-          <footer className="border-t border-neutral-200 py-6 dark:border-neutral-800">
-            <p className="mx-auto max-w-4xl px-5 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
+          <footer className="border-t border-slate-200 py-6 dark:border-slate-800">
+            <p className="mx-auto max-w-4xl px-5 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
               ข้อมูลอ้างอิงจากไฟล์ติดตามผลของอาจารย์ที่ปรึกษาสหกิจศึกษา อาจมีความล่าช้าในการอัปเดต
               หากพบข้อมูลไม่ตรงกับความเป็นจริง กรุณาติดต่ออาจารย์ที่ปรึกษาโดยตรง
             </p>

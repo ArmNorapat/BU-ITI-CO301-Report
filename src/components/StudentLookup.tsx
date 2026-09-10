@@ -63,9 +63,9 @@ export function StudentLookup() {
 
   return (
     <div className="flex flex-col gap-8">
-      <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8 dark:border-neutral-800 dark:bg-neutral-900">
+      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900">
         <h1 className="text-2xl font-bold sm:text-3xl">ตรวจผลการพิจารณาสหกิจศึกษา</h1>
-        <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+        <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
           กรอกรหัสนักศึกษาเพื่อดูสถานะล่าสุดของสถานประกอบการที่คุณสมัครไว้
         </p>
 
@@ -81,19 +81,19 @@ export function StudentLookup() {
               inputMode="numeric"
               autoComplete="off"
               placeholder="เช่น 1650703844"
-              className="w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-base tabular-nums outline-none transition placeholder:text-neutral-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 dark:border-neutral-700 dark:bg-neutral-950"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base tabular-nums outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 dark:border-slate-700 dark:bg-slate-950"
             />
           </div>
           <button
             type="submit"
             disabled={!canSubmit}
-            className="rounded-xl bg-orange-500 px-6 py-3 text-base font-semibold text-white transition hover:bg-orange-600 focus:ring-2 focus:ring-orange-500/40 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500/40 focus:outline-none disabled:cursor-not-allowed disabled:opacity-40"
           >
             {loading ? 'กำลังค้นหา…' : 'ตรวจสอบ'}
           </button>
         </form>
 
-        <p className="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+        <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
           พิมพ์ได้ทั้งแบบ 1650703844 และ 1-65-07-0384-4
         </p>
 
@@ -115,24 +115,24 @@ export function StudentLookup() {
 function StudentPanel({ student }: { student: StudentResult }) {
   return (
     <div className="flex flex-col gap-5">
-      <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
         <h2 className="text-xl font-semibold break-words">{student.name}</h2>
         <dl className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
-            <dt className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+            <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">
               รหัสนักศึกษา
             </dt>
             <dd className="mt-0.5 text-sm tabular-nums">{student.id}</dd>
           </div>
           {student.department ? (
             <div>
-              <dt className="text-xs font-medium text-neutral-500 dark:text-neutral-400">สาขาวิชา</dt>
+              <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">สาขาวิชา</dt>
               <dd className="mt-0.5 text-sm">{student.department}</dd>
             </div>
           ) : null}
           {student.advisor ? (
             <div>
-              <dt className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+              <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">
                 อาจารย์ที่ปรึกษาสหกิจ
               </dt>
               <dd className="mt-0.5 text-sm">{student.advisor}</dd>
@@ -140,7 +140,7 @@ function StudentPanel({ student }: { student: StudentResult }) {
           ) : null}
           {student.semester ? (
             <div>
-              <dt className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+              <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">
                 ภาคการศึกษาที่ออกฝึก
               </dt>
               <dd className="mt-0.5 text-sm">{student.semester}</dd>
@@ -148,7 +148,7 @@ function StudentPanel({ student }: { student: StudentResult }) {
           ) : null}
           {student.maskedEmail ? (
             <div>
-              <dt className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+              <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">
                 อีเมลที่ใช้ติดต่อ
               </dt>
               <dd className="mt-0.5 text-sm break-all">{student.maskedEmail}</dd>

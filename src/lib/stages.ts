@@ -65,11 +65,6 @@ const MATCH_RULES: { keywords: string[]; key: Exclude<StageKey, 'unknown'> }[] =
   { keywords: ['ส่งประวัติ'], key: 'submitted' },
 ];
 
-/** ขั้นตอนที่ใช้วาด timeline (ไม่รวม rejected ที่เป็นสถานะพิเศษ) */
-export const TIMELINE_STEPS = (
-  ['submitted', 'reviewing', 'test', 'interview', 'accepted'] as const
-).map((key) => STAGE_DEFS[key]);
-
 const UNKNOWN: StageDef = {
   key: 'unknown',
   label: 'ยังไม่ระบุสถานะ',
@@ -106,6 +101,11 @@ export function stageTone(key: StageKey): string {
     case 'rejected':
       return 'bg-rose-50 text-rose-700 ring-rose-600/20 dark:bg-rose-500/10 dark:text-rose-300 dark:ring-rose-400/30';
     default:
-      return 'bg-neutral-100 text-neutral-700 ring-neutral-500/20 dark:bg-neutral-500/10 dark:text-neutral-300 dark:ring-neutral-400/30';
+      return 'bg-slate-100 text-slate-700 ring-slate-500/20 dark:bg-slate-500/10 dark:text-slate-300 dark:ring-slate-400/30';
   }
+}
+
+/** คำอธิบายว่าสถานะนี้แปลว่าอะไร ใช้แสดงใต้ชื่อสถานะ */
+export function stageDescription(key: StageKey): string {
+  return key === 'unknown' ? '' : STAGE_DEFS[key].description;
 }
