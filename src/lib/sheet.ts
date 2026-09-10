@@ -24,7 +24,7 @@ const APPS_SCRIPT_TOKEN = process.env.APPS_SCRIPT_TOKEN ?? '';
 /** ตั้ง SHOW_SENSITIVE_FIELDS=true เมื่อยอมรับความเสี่ยงว่าใครก็ตามที่รู้รหัส นศ. จะเห็นข้อมูลเหล่านี้ */
 const SHOW_SENSITIVE = process.env.SHOW_SENSITIVE_FIELDS === 'true';
 
-const CACHE_SECONDS = Number(process.env.SHEET_CACHE_SECONDS ?? '120');
+const CACHE_SECONDS = Number(process.env.SHEET_CACHE_SECONDS ?? '60');
 
 export class SheetError extends Error {
   code: string;

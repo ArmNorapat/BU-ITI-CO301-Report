@@ -1,37 +1,8 @@
 import { stageDescription, stageTone } from '@/lib/stages';
 import type { PublicApplication } from '@/lib/types';
 
+import { DocumentList } from './DocumentList';
 import { StatusLog } from './StatusLog';
-
-/** ป้ายบอกว่าเอกสารชิ้นนั้นส่งครบหรือยัง */
-function DocChip({ label, ok, href }: { label: string; ok: boolean; href?: string }) {
-  const base =
-    'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ring-1 ring-inset';
-  const tone = ok
-    ? 'bg-emerald-50 text-emerald-700 ring-emerald-600/20 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-400/30'
-    : 'bg-slate-100 text-slate-500 ring-slate-500/20 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-600/40';
-
-  const content = (
-    <>
-      <span aria-hidden>{ok ? '✓' : '—'}</span>
-      {label}
-    </>
-  );
-
-  if (ok && href) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${base} ${tone} underline-offset-2 transition hover:underline`}
-      >
-        {content}
-      </a>
-    );
-  }
-  return <span className={`${base} ${tone}`}>{content}</span>;
-}
 
 function Field({ label, value }: { label: string; value: string }) {
   if (!value || value === '-') return null;
@@ -81,11 +52,7 @@ export function ApplicationCard({ app, index }: { app: PublicApplication; index:
         {app.phone ? <Field label="เบอร์โทรศัพท์ที่ให้ไว้" value={app.phone} /> : null}
       </dl>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-5 dark:border-slate-800">
-        <DocChip label="Web Portfolio" ok={app.hasPortfolio} href={app.portfolioUrl} />
-        <DocChip label="Resume / Transcript" ok={app.hasDocuments} href={app.documentsUrl} />
-        <DocChip label="LinkedIn" ok={app.hasLinkedin} href={app.linkedinUrl} />
-      </div>
+      <DocumentList app={app} />
     </article>
   );
 }
