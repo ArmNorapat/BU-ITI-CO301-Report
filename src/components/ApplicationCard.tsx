@@ -8,8 +8,8 @@ function Field({ label, value }: { label: string; value: string }) {
   if (!value || value === '-') return null;
   return (
     <div>
-      <dt className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</dt>
-      <dd className="mt-0.5 text-sm whitespace-pre-line text-slate-800 dark:text-slate-200">
+      <dt className="text-sm font-medium text-slate-500 dark:text-slate-400">{label}</dt>
+      <dd className="mt-0.5 text-base whitespace-pre-line text-slate-800 dark:text-slate-200">
         {value}
       </dd>
     </div>
@@ -22,14 +22,14 @@ export function ApplicationCard({ app, index }: { app: PublicApplication; index:
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900">
       <header className="min-w-0">
-        <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
+        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
           ใบสมัครที่ {index + 1}
         </p>
-        <h3 className="mt-1 text-lg font-semibold break-words">
+        <h3 className="mt-1 text-xl font-semibold break-words">
           {app.company || 'ยังไม่ระบุสถานประกอบการ'}
         </h3>
         {app.position ? (
-          <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">{app.position}</p>
+          <p className="mt-0.5 text-base text-slate-600 dark:text-slate-400">{app.position}</p>
         ) : null}
       </header>
 
@@ -37,9 +37,9 @@ export function ApplicationCard({ app, index }: { app: PublicApplication; index:
       <div
         className={`mt-5 rounded-xl px-4 py-4 ring-1 ring-inset ${stageTone(app.stageKey)}`}
       >
-        <p className="text-xs font-medium opacity-80">สถานะล่าสุด</p>
-        <p className="mt-1 text-xl leading-snug font-bold break-words">{app.stageLabel}</p>
-        {description ? <p className="mt-2 text-sm leading-relaxed">{description}</p> : null}
+        <p className="text-sm font-medium opacity-80">สถานะล่าสุด</p>
+        <p className="mt-1 text-2xl leading-snug font-bold break-words">{app.stageLabel}</p>
+        {description ? <p className="mt-2 text-base leading-relaxed">{description}</p> : null}
       </div>
 
       {app.statusText ? <StatusLog text={app.statusText} /> : null}

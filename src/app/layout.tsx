@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Noto_Sans_Thai } from 'next/font/google';
 import Link from 'next/link';
 
+import { SITE_TITLE } from '@/lib/site';
+
 import './globals.css';
 
 const thai = Noto_Sans_Thai({
@@ -12,7 +14,7 @@ const thai = Noto_Sans_Thai({
 });
 
 export const metadata: Metadata = {
-  title: 'ตรวจผลการพิจารณาสหกิจศึกษา | BU ITI',
+  title: `${SITE_TITLE} | BU ITI`,
   description:
     'ระบบตรวจสอบผลการพิจารณาของสถานประกอบการที่นักศึกษาสมัครเข้าฝึกงานสหกิจศึกษา คณะเทคโนโลยีสารสนเทศและนวัตกรรม มหาวิทยาลัยกรุงเทพ',
   robots: { index: false, follow: false },
@@ -28,13 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="flex items-center gap-3">
                 <span
                   aria-hidden
-                  className="grid size-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white"
+                  className="grid size-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 text-base font-bold text-white"
                 >
                   BU
                 </span>
                 <span className="leading-tight">
-                  <span className="block text-sm font-semibold">ผลการพิจารณาสหกิจศึกษา</span>
-                  <span className="block text-xs text-slate-500 dark:text-slate-400">
+                  <span className="block text-base font-semibold">ผลการพิจารณาสหกิจศึกษา</span>
+                  <span className="block text-sm text-slate-500 dark:text-slate-400">
                     School of Information Technology and Innovation
                   </span>
                 </span>
@@ -45,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto w-full max-w-4xl flex-1 px-5 py-8 sm:py-12">{children}</main>
 
           <footer className="border-t border-slate-200 py-6 dark:border-slate-800">
-            <p className="mx-auto max-w-4xl px-5 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+            <p className="mx-auto max-w-4xl px-5 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
               ข้อมูลอ้างอิงจากไฟล์ติดตามผลของอาจารย์ที่ปรึกษาสหกิจศึกษา อาจมีความล่าช้าในการอัปเดต
               หากพบข้อมูลไม่ตรงกับความเป็นจริง กรุณาติดต่ออาจารย์ที่ปรึกษาโดยตรง
             </p>

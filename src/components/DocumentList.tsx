@@ -88,14 +88,14 @@ function DocRow({ label, state, href }: { label: string; state: DocState; href?:
             <IconCheck />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-sm font-semibold text-indigo-900 dark:text-indigo-100">
+            <span className="block text-base font-semibold text-indigo-900 dark:text-indigo-100">
               {label}
             </span>
-            <span className="block text-xs text-indigo-700/80 dark:text-indigo-300/80">
+            <span className="block text-sm text-indigo-700/80 dark:text-indigo-300/80">
               แตะเพื่อเปิดในแท็บใหม่
             </span>
           </span>
-          <span className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-2.5 py-1.5 text-xs font-semibold text-white transition group-hover:bg-indigo-700">
+          <span className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white transition group-hover:bg-indigo-700">
             เปิดลิงก์
             <IconExternal />
           </span>
@@ -114,10 +114,10 @@ function DocRow({ label, state, href }: { label: string; state: DocState; href?:
           {state === 'withheld' ? <IconLock /> : <IconDash />}
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-sm font-medium text-slate-600 dark:text-slate-300">
+          <span className="block text-base font-medium text-slate-600 dark:text-slate-300">
             {label}
           </span>
-          <span className="block text-xs text-slate-500 dark:text-slate-400">
+          <span className="block text-sm text-slate-500 dark:text-slate-400">
             {state === 'withheld'
               ? 'ส่งแล้ว — ระบบไม่เปิดเผยลิงก์เอกสารส่วนบุคคล'
               : 'ยังไม่ได้ส่ง'}
@@ -134,7 +134,7 @@ export function DocumentList({ app }: { app: PublicApplication }) {
 
   return (
     <section className="mt-5 border-t border-slate-100 pt-5 dark:border-slate-800">
-      <h4 className="text-xs font-medium text-slate-500 dark:text-slate-400">
+      <h4 className="text-sm font-medium text-slate-500 dark:text-slate-400">
         เอกสารประกอบการสมัคร
       </h4>
       <ul className="mt-3 flex flex-col gap-2">
