@@ -76,7 +76,7 @@ export function StudentLookup() {
             ปีการศึกษา {ACADEMIC_YEAR}
           </span>
         </h1>
-        <p className="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+        <p className="mt-3 text-lg leading-relaxed text-slate-700 sm:text-xl dark:text-slate-300">
           กรอกรหัสนักศึกษาเพื่อดูสถานะล่าสุดของสถานประกอบการที่คุณสมัครไว้
         </p>
 
@@ -117,6 +117,26 @@ export function StudentLookup() {
             {error}
           </p>
         ) : null}
+
+        {/* แสดงตลอด ไม่ต้องรอค้นหาก่อน — นักศึกษาควรเห็นคำแนะนำนี้ทุกครั้งที่เข้ามา */}
+        <p className="mt-5 flex gap-3 rounded-xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 text-lg leading-relaxed text-slate-800 sm:text-xl dark:border-indigo-500/25 dark:bg-indigo-500/10 dark:text-slate-100">
+          <svg
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="mt-1 size-6 shrink-0 text-indigo-500 dark:text-indigo-400"
+            aria-hidden
+          >
+            <path
+              fillRule="evenodd"
+              d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a1 1 0 0 0 0 2v3a1 1 0 0 0 1 1h1a1 1 0 1 0 0-2v-3a1 1 0 0 0-1-1H9Z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span>
+            ขอให้เข้ามาตรวจสอบสถานะอย่างต่อเนื่อง
+            และหากมีคำถามติดต่ออาจารย์ที่ปรึกษาพร้อมข้อมูลของนักศึกษา
+          </span>
+        </p>
       </section>
 
       {student ? <StudentPanel student={student} /> : null}
@@ -172,25 +192,6 @@ function StudentPanel({ student }: { student: StudentResult }) {
       {student.applications.map((app, i) => (
         <ApplicationCard key={`${app.company}-${i}`} app={app} index={i} />
       ))}
-
-      <p className="flex gap-2.5 rounded-xl border border-indigo-100 bg-indigo-50/60 px-4 py-3 text-sm leading-relaxed text-slate-700 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-slate-300">
-        <svg
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="mt-0.5 size-5 shrink-0 text-indigo-500 dark:text-indigo-400"
-          aria-hidden
-        >
-          <path
-            fillRule="evenodd"
-            d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a1 1 0 0 0 0 2v3a1 1 0 0 0 1 1h1a1 1 0 1 0 0-2v-3a1 1 0 0 0-1-1H9Z"
-            clipRule="evenodd"
-          />
-        </svg>
-        <span>
-          ขอให้เข้ามาตรวจสอบสถานะอย่างต่อเนื่อง
-          และหากมีคำถามติดต่ออาจารย์ที่ปรึกษาพร้อมข้อมูลของนักศึกษา
-        </span>
-      </p>
     </div>
   );
 }
