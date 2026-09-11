@@ -190,7 +190,7 @@ function StudentPanel({ student }: { student: StudentResult }) {
       </section>
 
       {student.applications.map((app, i) => (
-        <ApplicationCard key={`${app.company}-${i}`} app={app} index={i} />
+        <ApplicationCard key={`${app.company}-${i}`} app={app} />
       ))}
     </div>
   );

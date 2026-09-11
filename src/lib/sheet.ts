@@ -2,7 +2,6 @@ import 'server-only';
 
 import { parseCsv } from './csv';
 import { buildAdvisorMap, normalizeSheetId, parseRecords } from './parse-sheet';
-import { resolveStage } from './stages';
 import type { PublicApplication, RawApplication, StudentResult } from './types';
 
 /**
@@ -150,16 +149,11 @@ function maskEmail(email: string): string {
 }
 
 function toPublic(raw: RawApplication): PublicApplication {
-  const stage = resolveStage(raw.stage);
   const isLink = (v: string) => /^https?:\/\//i.test((v || '').trim());
 
   const app: PublicApplication = {
     company: raw.company,
     position: raw.position,
-    stage: raw.stage,
-    stageKey: stage.key,
-    stageLabel: stage.label,
-    stageStep: stage.step,
     statusText: raw.statusText,
     registrationRequest: raw.registrationRequest,
     registrationStatus: raw.registrationStatus,
@@ -206,8 +200,8 @@ export async function getStudent(idInput: string): Promise<StudentResult> {
 
   if (!rows.length) throw new SheetError('NOT_FOUND');
 
-  // เรียงให้สถานะที่คืบหน้ามากที่สุดอยู่บนสุด
-  const applications = rows.map(toPublic).sort((a, b) => b.stageStep - a.stageStep);
+  // เรียงตามลำดับในชีต — อาจารย์เป็นคนจัดลำดับเอง
+  const applications = rows.map(toPublic);
   const primary = rows[0];
 
   return {

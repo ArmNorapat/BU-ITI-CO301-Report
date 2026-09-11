@@ -1,8 +1,7 @@
-import { stageDescription, stageTone } from '@/lib/stages';
 import type { PublicApplication } from '@/lib/types';
 
+import { AdvisorStatus } from './AdvisorStatus';
 import { DocumentList } from './DocumentList';
-import { StatusLog } from './StatusLog';
 
 function Field({ label, value }: { label: string; value: string }) {
   if (!value || value === '-') return null;
@@ -16,16 +15,11 @@ function Field({ label, value }: { label: string; value: string }) {
   );
 }
 
-export function ApplicationCard({ app, index }: { app: PublicApplication; index: number }) {
-  const description = stageDescription(app.stageKey);
-
+export function ApplicationCard({ app }: { app: PublicApplication }) {
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900">
       <header className="min-w-0">
-        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-          ใบสมัครที่ {index + 1}
-        </p>
-        <h3 className="mt-1 text-xl font-semibold break-words">
+        <h3 className="text-xl font-semibold break-words">
           {app.company || 'ยังไม่ระบุสถานประกอบการ'}
         </h3>
         {app.position ? (
@@ -33,16 +27,7 @@ export function ApplicationCard({ app, index }: { app: PublicApplication; index:
         ) : null}
       </header>
 
-      {/* สถานะคือสิ่งที่นักศึกษาเข้ามาดู จึงให้เป็นบล็อกเด่นแทนการเป็นป้ายเล็ก ๆ */}
-      <div
-        className={`mt-5 rounded-xl px-4 py-4 ring-1 ring-inset ${stageTone(app.stageKey)}`}
-      >
-        <p className="text-sm font-medium opacity-80">สถานะล่าสุด</p>
-        <p className="mt-1 text-2xl leading-snug font-bold break-words">{app.stageLabel}</p>
-        {description ? <p className="mt-2 text-base leading-relaxed">{description}</p> : null}
-      </div>
-
-      {app.statusText ? <StatusLog text={app.statusText} /> : null}
+      <AdvisorStatus text={app.statusText} />
 
       <dl className="mt-5 grid gap-4 sm:grid-cols-2">
         <Field label="คำขอลงทะเบียนสหกิจ" value={app.registrationRequest} />

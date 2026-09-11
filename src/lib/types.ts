@@ -26,10 +26,6 @@ export type RawApplication = {
 export type PublicApplication = {
   company: string;
   position: string;
-  stage: string;
-  stageKey: StageKey;
-  stageLabel: string;
-  stageStep: number;
   statusText: string;
   registrationRequest: string;
   registrationStatus: string;
@@ -54,12 +50,3 @@ export type StudentResult = {
   maskedEmail: string;
   applications: PublicApplication[];
 };
-
-export type StageKey =
-  | 'submitted'
-  | 'reviewing'
-  | 'test'
-  | 'interview'
-  | 'accepted'
-  | 'rejected'
-  | 'unknown';
