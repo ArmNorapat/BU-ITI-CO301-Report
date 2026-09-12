@@ -56,6 +56,29 @@ function mapColumns(header: string[]) {
   };
 }
 
+/**
+ * อาจารย์กับนักศึกษากรอกลิงก์ไม่เหมือนกัน บางคนใส่ https:// ครบ บางคนพิมพ์แค่
+ * "www.linkedin.com/in/..." หรือ "pakin51.xyz" (ในชีตจริง 57 จาก 173 แถวเป็นแบบหลัง)
+ * จึงเติม https:// ให้เองเมื่อค่าดูเป็นโดเมน และคืนค่าว่างเมื่อไม่ใช่ลิงก์ เช่น "-" หรือข้อความอื่น
+ */
+export function toUrl(value: string): string {
+  let v = (value ?? '').trim();
+  if (!v) return '';
+
+  if ((v.match(/https?:\/\//gi) ?? []).length > 1) {
+    // ใส่มาหลายลิงก์ในช่องเดียว — เอาอันแรกพอ
+    v = v.split(/\s+/)[0];
+  } else {
+    // ช่องว่างที่หลุดมากลางลิงก์เป็นการพิมพ์ผิด ไม่ใช่ตัวคั่นลิงก์สองอัน
+    // (เช่น "www.linkedin.com/in/ warintorn-...") จึงลบทิ้ง
+    v = v.replace(/\s+/g, '');
+  }
+
+  if (/^https?:\/\//i.test(v)) return v;
+  if (/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/|\?|$)/i.test(v)) return `https://${v}`;
+  return '';
+}
+
 function pick(row: string[], index: number): string {
   if (index < 0 || index >= row.length) return '';
   return (row[index] ?? '').trim();

@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { parseCsv } from './csv';
-import { buildAdvisorMap, normalizeSheetId, parseRecords } from './parse-sheet';
+import { buildAdvisorMap, normalizeSheetId, parseRecords, toUrl } from './parse-sheet';
 import type { PublicApplication, RawApplication, StudentResult } from './types';
 
 /**
@@ -149,7 +149,9 @@ function maskEmail(email: string): string {
 }
 
 function toPublic(raw: RawApplication): PublicApplication {
-  const isLink = (v: string) => /^https?:\/\//i.test((v || '').trim());
+  const portfolioUrl = toUrl(raw.portfolioUrl);
+  const documentsUrl = toUrl(raw.documentsUrl);
+  const linkedinUrl = toUrl(raw.linkedinUrl);
 
   const app: PublicApplication = {
     company: raw.company,
@@ -158,17 +160,17 @@ function toPublic(raw: RawApplication): PublicApplication {
     registrationRequest: raw.registrationRequest,
     registrationStatus: raw.registrationStatus,
     letterStatus: raw.letterStatus,
-    hasPortfolio: isLink(raw.portfolioUrl),
-    hasDocuments: isLink(raw.documentsUrl),
-    hasLinkedin: isLink(raw.linkedinUrl),
-    portfolioUrl: isLink(raw.portfolioUrl) ? raw.portfolioUrl : '',
-    linkedinUrl: isLink(raw.linkedinUrl) ? raw.linkedinUrl : '',
+    hasPortfolio: Boolean(portfolioUrl),
+    hasDocuments: Boolean(documentsUrl),
+    hasLinkedin: Boolean(linkedinUrl),
+    portfolioUrl,
+    linkedinUrl,
   };
 
   if (SHOW_SENSITIVE) {
     app.gpa = raw.gpa;
     app.phone = raw.phone;
-    app.documentsUrl = isLink(raw.documentsUrl) ? raw.documentsUrl : '';
+    app.documentsUrl = documentsUrl;
   }
 
   return app;
